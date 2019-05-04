@@ -1,19 +1,19 @@
-package demo;
+package springboot;
 
+import demo.controllers.GreetingController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan("demo")
 public class DemoApplication {
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
-        InjectedByConstructorService constructorService = (InjectedByConstructorService) ctx.getBean("injectedByConstructorService");
 
-        constructorService.getMessage();
-
-        SetterBasedService setterBasedService=(SetterBasedService) ctx.getBean("setterBasedService");
-        setterBasedService.getMessage();
+        GreetingController controller=(GreetingController) ctx.getBean("greetingController");
+        controller.sayHello();
     }
 }
